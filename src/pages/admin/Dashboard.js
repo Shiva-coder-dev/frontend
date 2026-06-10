@@ -81,6 +81,45 @@ export default function AdminDashboard() {
           </div>
         ))}
       </div>
+   {/* Available Balance Card */}
+      {(() => {
+        const totalInvested = stats?.totalInvested || 0;
+        const totalLoanBook = stats?.totalLoanBook || 0;
+        const availableBalance = totalInvested - totalLoanBook;
+        const isPositive = availableBalance >= 0;
+        return (
+          <div style={{
+            background: isPositive ? 'linear-gradient(135deg, rgba(16,185,129,.15), rgba(16,185,129,.05))' : 'linear-gradient(135deg, rgba(239,68,68,.15), rgba(239,68,68,.05))',
+            border: `1px solid ${isPositive ? 'rgba(16,185,129,.3)' : 'rgba(239,68,68,.3)'}`,
+            borderRadius: 'var(--r2)', padding: '24px 28px', marginBottom: 24,
+            display: 'flex', alignItems: 'center', gap: 16,
+          }}>
+            <div style={{
+              width: 56, height: 56, borderRadius: 14, flexShrink: 0,
+              background: isPositive ? 'rgba(16,185,129,.2)' : 'rgba(239,68,68,.2)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: 26, color: isPositive ? 'var(--green)' : 'var(--red)',
+            }}>
+              <i className={`ti ${isPositive ? 'ti-wallet' : 'ti-alert-triangle'}`} />
+            </div>
+            <div>
+              <div style={{ fontSize: 12, color: 'var(--text2)', marginBottom: 6, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '.5px' }}>
+                Currently Available Balance
+              </div>
+              <div style={{
+                fontSize: 36, fontWeight: 700, fontFamily: 'var(--font-head)',
+                color: isPositive ? 'var(--green)' : 'var(--red)', lineHeight: 1,
+              }}>
+                {fmt(Math.abs(availableBalance))}
+                {!isPositive && <span style={{ fontSize: 14, marginLeft: 8 }}>(Deficit)</span>}
+              </div>
+              <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 6 }}>
+                Total Invested {fmt(totalInvested)} − Active Loans {fmt(totalLoanBook)}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Charts */}
       <div className="grid-charts">

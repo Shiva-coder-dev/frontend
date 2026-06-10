@@ -16,6 +16,7 @@ export default function MemberLayout() {
         { icon: 'ti-dashboard', label: 'Dashboard', to: '/member/dashboard' },
         { icon: 'ti-coin', label: 'Loan Details', to: '/member/loan' },
         { icon: 'ti-trending-up', label: 'Investment', to: '/member/investment' },
+        { icon: 'ti-star', label: 'Samruthy', to: '/member/samruthy' },
         { icon: 'ti-clock', label: 'Payment History', to: '/member/payments' },
       ]
     },

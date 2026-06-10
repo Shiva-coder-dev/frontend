@@ -17,6 +17,8 @@ import AnalyticsPage from './pages/admin/Analytics';
 import ReportsPage from './pages/admin/Reports';
 import ActivityPage from './pages/admin/Activity';
 import AdminCalculator from './pages/admin/Calculator';
+import InvestmentPage from './pages/admin/Investment';
+import SamruthyPage from './pages/admin/Samruthy';
 
 // Member Pages
 import MemberDashboard from './pages/member/Dashboard';
@@ -25,6 +27,7 @@ import MyInvestment from './pages/member/MyInvestment';
 import MyPayments from './pages/member/MyPayments';
 import MyProfile from './pages/member/MyProfile';
 import MemberCalculator from './pages/member/Calculator';
+import MySamruthy from './pages/member/MySamruthy';
 
 const ProtectedAdmin = ({ children }) => {
   const { user, loading } = useAuth();
@@ -67,6 +70,8 @@ function AppRoutes() {
         <Route path="reports" element={<ReportsPage />} />
         <Route path="activity" element={<ActivityPage />} />
         <Route path="calculator" element={<AdminCalculator />} />
+        <Route path="investment" element={<InvestmentPage />} />
+        <Route path="samruthy" element={<SamruthyPage />} />
       </Route>
 
       {/* Member Routes */}
@@ -77,6 +82,7 @@ function AppRoutes() {
         <Route path="payments" element={<MyPayments />} />
         <Route path="profile" element={<MyProfile />} />
         <Route path="calculator" element={<MemberCalculator />} />
+        <Route path="samruthy" element={<MySamruthy />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
