@@ -23,7 +23,7 @@ export default function FinesPage() {
     setLoading(true);
     try {
       const [fineRes, memRes] = await Promise.all([
-        api.get('/fines'),
+        api.get('/fine'),
         api.get('/members'),
       ]);
       setData(fineRes.data.data);
@@ -42,7 +42,7 @@ export default function FinesPage() {
     }
     setSaving(true);
     try {
-      await api.post('/fines', form);
+      await api.post('/fine', form);
       toast.success('Fine added successfully!');
       setShowAddModal(false);
       setForm({ memberId: '', amount: '', reason: '', fineType: 'Late Fine', date: new Date().toISOString().slice(0, 10), note: '' });
@@ -54,7 +54,7 @@ export default function FinesPage() {
 
   const handleMarkPaid = async (id, isPaid) => {
     try {
-      await api.put(`/fines/${id}/${isPaid ? 'unpay' : 'pay'}`);
+      await api.put(`/fine/${id}/${isPaid ? 'unpay' : 'pay'}`);
       toast.success(isPaid ? 'Fine marked as unpaid' : 'Fine marked as paid ✅');
       fetchData();
     } catch { toast.error('Failed to update'); }
@@ -63,7 +63,7 @@ export default function FinesPage() {
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this fine?')) return;
     try {
-      await api.delete(`/fines/${id}`);
+      await api.delete(`/fine/${id}`);
       toast.success('Fine deleted');
       fetchData();
     } catch { toast.error('Delete failed'); }

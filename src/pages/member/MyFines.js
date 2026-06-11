@@ -18,7 +18,7 @@ export default function MyFines() {
 
   useEffect(() => {
     if (member?._id) {
-      api.get(`/fines/member/${member._id}`)
+      api.get(`/fine/member/${member._id}`)
         .then(r => setData(r.data.data))
         .finally(() => setLoading(false));
     }

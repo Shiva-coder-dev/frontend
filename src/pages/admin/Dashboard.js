@@ -22,7 +22,7 @@ export default function AdminDashboard() {
   api.get('/members/stats/summary'),
   api.get('/reports/analytics'),
   api.get('/reports/activity'),
-  api.get('/fines'),
+  api.get('/fine'),
 ]).then(([s, a, l, f]) => {
   setStats(s.data.data);
   setAnalytics(a.data.data);
