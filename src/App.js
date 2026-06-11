@@ -20,6 +20,7 @@ import AdminCalculator from './pages/admin/Calculator';
 import InvestmentPage from './pages/admin/Investment';
 import SamruthyPage from './pages/admin/Samruthy';
 import FinesPage from './pages/admin/Fines';
+import RepaymentsPage from './pages/admin/Repayments';
 // Member Pages
 import MemberDashboard from './pages/member/Dashboard';
 import MyLoan from './pages/member/MyLoan';
@@ -74,6 +75,7 @@ function AppRoutes() {
         <Route path="investment" element={<InvestmentPage />} />
         <Route path="samruthy" element={<SamruthyPage />} />
         <Route path="fines" element={<FinesPage />} />
+        <Route path="repayments" element={<RepaymentsPage />} />
       </Route>
 
       {/* Member Routes */}

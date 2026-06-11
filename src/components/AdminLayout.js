@@ -36,6 +36,7 @@ export default function AdminLayout() {
       label: 'Management', items: [
         { icon: 'ti-users', label: 'Members', to: '/admin/members' },
         { icon: 'ti-coin', label: 'Loan Manager', to: '/admin/loans' },
+        { icon: 'ti-receipt', label: 'Repayments', to: '/admin/repayments' },
         { icon: 'ti-trending-up', label: 'Investment', to: '/admin/investment' },
         { icon: 'ti-star', label: 'Samruthy', to: '/admin/samruthy' },
         { icon: 'ti-alert-triangle', label: 'Fines', to: '/admin/fines' },
