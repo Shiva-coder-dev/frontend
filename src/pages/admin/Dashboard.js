@@ -13,19 +13,22 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState(null);
   const [analytics, setAnalytics] = useState(null);
   const [logs, setLogs] = useState([]);
+  const [fineStats, setFineStats] = useState({ grandTotal: 0, totalPaid: 0, totalUnpaid: 0 });
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([
-      api.get('/members/stats/summary'),
-      api.get('/reports/analytics'),
-      api.get('/reports/activity'),
-    ]).then(([s, a, l]) => {
-      setStats(s.data.data);
-      setAnalytics(a.data.data);
-      setLogs(l.data.data.slice(0, 5));
-    }).finally(() => setLoading(false));
+  api.get('/members/stats/summary'),
+  api.get('/reports/analytics'),
+  api.get('/reports/activity'),
+  api.get('/fines'),
+]).then(([s, a, l, f]) => {
+  setStats(s.data.data);
+  setAnalytics(a.data.data);
+  setLogs(l.data.data.slice(0, 5));
+  setFineStats(f.data.data);
+}).finally(() => setLoading(false));
   }, []);
 
   if (loading) return <div className="loader"><i className="ti ti-loader-2 spin" /></div>;
@@ -120,6 +123,37 @@ export default function AdminDashboard() {
           </div>
         );
       })()}
+      
+      {/* Fines Impact Card */}
+<div style={{
+  background: 'linear-gradient(135deg, rgba(239,68,68,.12), rgba(239,68,68,.04))',
+  border: '1px solid rgba(239,68,68,.25)',
+  borderRadius: 'var(--r2)', padding: '20px 24px', marginBottom: 24,
+  display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+  flexWrap: 'wrap', gap: 16,
+}}>
+  <div className="flex-center gap-12">
+    <div style={{ width: 50, height: 50, borderRadius: 12, background: 'rgba(239,68,68,.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, color: 'var(--red)', flexShrink: 0 }}>
+      <i className="ti ti-alert-triangle" />
+    </div>
+    <div>
+      <div style={{ fontSize: 12, color: 'var(--text2)', marginBottom: 4, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '.5px' }}>Total Fines</div>
+      <div style={{ fontSize: 28, fontWeight: 700, fontFamily: 'var(--font-head)', color: 'var(--red)', lineHeight: 1 }}>{fmt(fineStats.grandTotal)}</div>
+      <div style={{ fontSize: 12, color: 'var(--text2)', marginTop: 4 }}>Collected: {fmt(fineStats.totalPaid)} · Pending: {fmt(fineStats.totalUnpaid)}</div>
+    </div>
+  </div>
+  <div className="flex-center gap-24">
+    {[
+      ['Collected', fmt(fineStats.totalPaid), 'var(--green)'],
+      ['Pending', fmt(fineStats.totalUnpaid), 'var(--amber)'],
+    ].map(([label, value, color]) => (
+      <div key={label} style={{ textAlign: 'center' }}>
+        <div style={{ fontSize: 11, color: 'var(--text3)', marginBottom: 4 }}>{label}</div>
+        <div style={{ fontSize: 15, fontWeight: 700, color }}>{value}</div>
+      </div>
+    ))}
+  </div>
+</div>
 
       {/* Charts */}
       <div className="grid-charts">

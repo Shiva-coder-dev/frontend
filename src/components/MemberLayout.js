@@ -23,6 +23,7 @@ export default function MemberLayout() {
     {
       label: 'Tools', items: [
         { icon: 'ti-calculator', label: 'EMI Calculator', to: '/member/calculator' },
+        { icon: 'ti-alert-triangle', label: 'My Fines', to: '/member/fines' },
         { icon: 'ti-user', label: 'My Profile', to: '/member/profile' },
       ]
     },
